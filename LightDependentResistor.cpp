@@ -10,10 +10,11 @@
 
 #include "LightDependentResistor.h"
 
-LightDependentResistor::LightDependentResistor(int pin, unsigned long other_resistor, ePhotoCellKind kind) :
+LightDependentResistor::LightDependentResistor(int pin, unsigned int adc_resolution_bits, unsigned long other_resistor, ePhotoCellKind kind) :
   _photocell_on_ground (true),
   _pin (pin),
-  _other_resistor (other_resistor)
+  _other_resistor (other_resistor),
+  _adc_resolution_bits (adc_resolution_bits)
 {
   switch (kind) {
     case GL5516:
@@ -43,12 +44,13 @@ LightDependentResistor::LightDependentResistor(int pin, unsigned long other_resi
     }
 }
 
-LightDependentResistor::LightDependentResistor(int pin, unsigned long other_resistor, float mult_value, float pow_value) :
+LightDependentResistor::LightDependentResistor(int pin, unsigned int adc_resolution_bits, unsigned long other_resistor, float mult_value, float pow_value) :
   _photocell_on_ground (true),
   _pin (pin),
   _other_resistor (other_resistor),
   _mult_value (mult_value),
-  _pow_value (pow_value)
+  _pow_value (pow_value),
+  _adc_resolution_bits (adc_resolution_bits)
 {
 }
 
@@ -79,7 +81,7 @@ float LightDependentResistor::getCurrentLux() const
 
   unsigned long photocell_resistor;
 
-  float ratio = ((float)1024/(float)photocell_value) - 1;
+  float ratio = ( (float)pow(2, _adc_resolution_bits)/(float)photocell_value ) - 1;
   if (_photocell_on_ground) {
     photocell_resistor = _other_resistor / ratio;
   } else {

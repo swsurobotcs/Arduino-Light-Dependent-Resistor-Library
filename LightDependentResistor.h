@@ -57,7 +57,7 @@ class LightDependentResistor
      * \param other_resistor (unsigned long) Resistor used for the voltage divider
      * \parameter kind (ePhotoCellKind) Used photocell
      */
-    LightDependentResistor(int pin, unsigned long other_resistor, ePhotoCellKind kind = GL5528);
+    LightDependentResistor(int pin, unsigned int adc_resolution_bits, unsigned long other_resistor, ePhotoCellKind kind = GL5528);
 
     /*!
      * \brief LightDependentResistor Initialize the light intensity getter class
@@ -80,7 +80,7 @@ class LightDependentResistor
      * \parameter mult_value (float) Multiplication parameter in "I[lux]=mult_value/(R[Ω]^pow_value)" expression
      * \parameter pow_value (float) Power parameter in "I[lux]=mult_value/(R[Ω]^pow_value)" expression
      */
-    LightDependentResistor(int pin, unsigned long other_resistor, float mult_value, float pow_value);
+    LightDependentResistor(int pin, unsigned int adc_resolution_bits, unsigned long other_resistor, float mult_value, float pow_value);
 
     /*!
      * \brief getCurrentLux Get light intensity (in lux) from the photocell
@@ -147,6 +147,7 @@ class LightDependentResistor
     float _mult_value;
     float _pow_value;
     bool _photocell_on_ground;
+    unsigned int _adc_resolution_bits;
 };
 
 #endif //LightDependentResistor_h
