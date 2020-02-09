@@ -54,6 +54,7 @@ class LightDependentResistor
      * \brief LightDependentResistor Initialize the light intensity getter class
      *
      * \param pin (int) Analog pin connected to the voltage divider
+     * \param adc_resolution_bits (unsigned int) ADC resolution 
      * \param other_resistor (unsigned long) Resistor used for the voltage divider
      * \parameter kind (ePhotoCellKind) Used photocell
      */
@@ -76,6 +77,7 @@ class LightDependentResistor
      *   5) You just found the 2 parameters: mult_value=32017200 and pow_value=1.5832
      *
      * \param pin (int) Analog pin connected to the voltage divider
+     * \param adc_resolution_bits (unsigned int) ADC resolution 
      * \param other_resistor (unsigned long) Resistor used for the voltage divider
      * \parameter mult_value (float) Multiplication parameter in "I[lux]=mult_value/(R[Ω]^pow_value)" expression
      * \parameter pow_value (float) Power parameter in "I[lux]=mult_value/(R[Ω]^pow_value)" expression
